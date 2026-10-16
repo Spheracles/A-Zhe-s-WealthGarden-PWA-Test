@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "阿哲的財富花園",
+  "short_name": "財富花園",
+  "description": "整理金錢、時間與心力，栽種自己的財富花園。",
+  "lang": "zh-TW",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#081f1b",
+  "theme_color": "#103b31",
+  "orientation": "any",
+  "icons": [
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ]
+}

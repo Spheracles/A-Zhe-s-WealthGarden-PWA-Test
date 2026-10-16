@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#103b31">
+  <meta name="description" content="阿哲的財富花園：把金錢、時間與心力放在同一座花園裡管理。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="財富花園">
+  <title>阿哲的財富花園</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="header">
+      <div class="brand"><span class="brand-icon" aria-hidden="true">🌱</span><div><p class="eyebrow">WEALTH GARDEN</p><h1>阿哲的財富花園</h1></div></div>
+      <div class="header-tools"><span id="storage-status" class="storage-status" title="資料保存在此裝置">本機保存</span></div>
+    </header>
+
+    <main id="main-content">
+      <section class="screen" id="tab-garden" aria-labelledby="nav-garden">
+        <div class="hero">
+          <div class="hero-glow"></div>
+          <div class="hero-top"><span class="chip">✦ 生命不只是一張收支表</span><span class="sun">☀</span></div>
+          <div class="garden-art" aria-hidden="true"><span>🌿</span><span>🌳</span><span>🌻</span><span>🌷</span><span>🌿</span></div>
+          <h2>讓每個選擇，都慢慢長成豐盛。</h2>
+          <p>看清金錢的流向，也照顧自己的時間與心力。</p>
+          <div class="hero-line" aria-hidden="true"></div>
+          <div class="hero-bottom">🪴 每一筆紀錄，都是一次有意識的栽種</div>
+        </div>
+
+        <div class="section-title"><h2>本月花園日記</h2><span id="month-name" class="muted"></span></div>
+        <div class="stats-grid">
+          <article class="stat"><div class="stat-label">本月收入</div><strong id="month-income">NT$ 0</strong><small>現金流入</small></article>
+          <article class="stat"><div class="stat-label">本月支出</div><strong id="month-expense">NT$ 0</strong><small>實際消費</small></article>
+          <article class="stat"><div class="stat-label">收支結餘</div><strong id="month-net">NT$ 0</strong><small>收入 − 支出；不含轉帳</small></article>
+          <article class="stat"><div class="stat-label">本月投入時間</div><strong id="month-hours">0 小時</strong><small>紀錄的時間總和</small></article>
+        </div>
+        <div class="callout"><span aria-hidden="true">💡</span><p><strong>記帳是看見，不是評判。</strong> 投資轉帳不等於消費；本頁數字是收支統計，並非總資產或淨值。</p></div>
+        <div class="section-title"><h2>最近種下的紀錄</h2><button type="button" class="text-button" data-go="log">查看全部 →</button></div>
+        <div id="recent-list" class="list-stack"></div>
+      </section>
+
+      <section class="screen" id="tab-log" aria-labelledby="nav-log" hidden>
+        <div class="section-title first-title"><h2>記帳與轉化</h2><span class="muted">每筆流動都有意義</span></div>
+        <form id="record-form" class="panel form-panel">
+          <label>項目名稱 <input id="record-name" name="name" maxlength="80" placeholder="例如：買書、接案收入、帳戶轉帳" required></label>
+          <div class="form-grid">
+            <label>金額（NT$） <input id="record-amount" name="amount" type="number" inputmode="decimal" min="0.01" max="999999999" step="0.01" placeholder="0" required></label>
+            <label>日期 <input id="record-date" name="date" type="date" required></label>
+          </div>
+          <label>金流類型
+            <select id="record-kind" name="kind">
+              <option value="expense">支出／消費</option><option value="income">收入</option><option value="transfer">資金移轉（不計入收支）</option>
+            </select>
+          </label>
+          <label>用途分類
+            <select id="record-category" name="category">
+              <option value="生活">🍵 生活</option><option value="學習">📚 學習成長</option><option value="工作">💼 工作／事業</option><option value="投資">🌳 投資／儲蓄</option><option value="交通">🚲 交通</option><option value="健康">💚 健康</option><option value="其他">✨ 其他</option>
+            </select>
+          </label>
+          <div class="form-grid">
+            <label>投入時間（小時） <input id="record-hours" name="hours" type="number" inputmode="decimal" min="0" max="100000" step="0.25" placeholder="0"></label>
+            <label>心力消耗（1–5） <select id="record-energy" name="energy"><option value="1">1 · 很低</option><option value="2">2 · 低</option><option value="3" selected>3 · 普通</option><option value="4">4 · 高</option><option value="5">5 · 很高</option></select></label>
+          </div>
+          <label>備註（選填） <input id="record-note" name="note" maxlength="300" placeholder="這筆花費或投入帶來什麼？"></label>
+          <button type="submit" class="primary-button">🌱 栽種這筆紀錄</button>
+          <p class="fineprint">收入、消費、資金移轉分開統計。轉帳不會自動算成支出，也不代表新增資產。</p>
+        </form>
+        <div class="section-title"><h2>所有紀錄</h2><span id="record-count" class="muted"></span></div>
+        <div id="record-list" class="list-stack"></div>
+      </section>
+
+      <section class="screen" id="tab-pain" aria-labelledby="nav-pain" hidden>
+        <div class="section-title first-title"><h2>痛點轉化實驗室</h2><span class="muted">從卡關找到下一步</span></div>
+        <form id="pain-form" class="panel form-panel">
+          <p class="intro">把最近不順的事記下來，讓它變成一個值得驗證的小實驗。</p>
+          <label>遇到什麼困難？ <textarea id="pain-input" required rows="4" maxlength="800" placeholder="例如：接案每次都要重新製作報價單，太花時間……"></textarea></label>
+          <button type="submit" class="primary-button amber">✨ 產生一份行動靈感</button>
+          <p class="fineprint">目前使用裝置內建的情境建議，<strong>不是 AI 生成</strong>，不會將文字送往外部伺服器。</p>
+        </form>
+        <div class="section-title"><h2>靈感種子庫</h2><span id="pain-count" class="muted"></span></div>
+        <div id="pain-list" class="list-stack"></div>
+      </section>
+
+      <section class="screen" id="tab-analytics" aria-labelledby="nav-analytics" hidden>
+        <div class="section-title first-title"><h2>財富分析與備份</h2><span class="muted">用真實數據看方向</span></div>
+        <div class="panel"><h3>本月支出分布</h3><p class="fineprint">僅統計「支出／消費」，不包含轉帳或收入。</p><div id="category-list" class="bars"></div></div>
+        <div class="panel analysis-box"><h3>本月投入的心力</h3><strong id="average-energy">尚無紀錄</strong><p class="fineprint">依有填寫的紀錄計算平均心力等級，並非醫療或心理評估。</p></div>
+        <div class="panel"><h3>資料管理</h3><p class="intro">資料僅儲存在目前瀏覽器／已安裝 App 的本機空間，不會自動跨手機同步。<strong>請定期匯出 JSON 備份。</strong></p>
+          <div class="backup-actions"><button id="export-json" type="button" class="secondary-button">⬇ 匯出完整備份（JSON）</button><button id="export-csv" type="button" class="secondary-button">⬇ 匯出記帳明細（CSV）</button><label for="import-json" class="secondary-button faux-button">⬆ 匯入 JSON 備份</label><input id="import-json" type="file" accept=".json,application/json" hidden><button id="reset-data" type="button" class="danger-button">清除本機所有資料</button></div>
+          <p class="fineprint">匯入會覆蓋目前資料；JSON 可還原記帳與痛點紀錄。CSV 僅供試算表分析。</p>
+        </div>
+        <div class="version">阿哲的財富花園 · PWA v1.1.0</div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="主要選單">
+      <button id="nav-garden" class="nav-button active" type="button" data-tab="garden" aria-current="page"><span class="nav-icon">🏡</span><span>我的花園</span></button>
+      <button id="nav-log" class="nav-button" type="button" data-tab="log"><span class="nav-icon">✍️</span><span>記帳轉化</span></button>
+      <button id="nav-pain" class="nav-button" type="button" data-tab="pain"><span class="nav-icon">💡</span><span>痛點實驗</span></button>
+      <button id="nav-analytics" class="nav-button" type="button" data-tab="analytics"><span class="nav-icon">📊</span><span>財富分析</span></button>
+    </nav>
+  </div>
+  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>
